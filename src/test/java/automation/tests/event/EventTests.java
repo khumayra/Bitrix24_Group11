@@ -11,7 +11,19 @@ import org.testng.annotations.Test;
 public class EventTests extends AbstractTestBase {
 
     /**
-     * 2. User should be able to attach link by clicking on the link icon.
+     * User Story :
+     *      3. As a user, I should be able to create
+     *        events by clicking on Event tab under Activity Stream.
+     * Acceptance Criteria:
+     *      2. User should be able to attach link by clicking on the link icon.
+     *
+     *  Test steps;
+     *      1- Login with HR credentials
+     *      2- Go to the event page
+     *      3- Create an event
+     *      4- Add link to this event
+     *      5- Save event
+     *      6- Verify event is added to activity stream
      */
     @Test
     public void verifyEventCreateByLink(){

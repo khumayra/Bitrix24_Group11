@@ -27,7 +27,6 @@ public abstract class AbstractTestBase {
         //System.out.println("reportName = " + reportName);
         reportName=reportName ==null ? "report.html" : reportName+".html";
         report=new ExtentReports();
-
         String reportPath=System.getProperty("user.dir")+"/test_output/"+reportName;
         //   System.out.println("reportPath = " + reportPath);
         htmlReporter=new ExtentHtmlReporter(reportPath);
@@ -44,7 +43,7 @@ public abstract class AbstractTestBase {
     @BeforeMethod
     public void setup(){
         String URL= ConfigurationReader.getProperty("url");
-        //System.out.println("URL = " + URL);
+        System.out.println("URL = " + URL);
         Driver.getDriver().get(URL);
         wait=new WebDriverWait(Driver.getDriver(),15);
         actions=new Actions(Driver.getDriver());

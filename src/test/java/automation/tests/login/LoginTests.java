@@ -7,7 +7,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LoginTests  extends AbstractTestBase {
-
     /**
      * Test default login option
      */

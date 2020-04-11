@@ -44,6 +44,7 @@ public abstract class AbstractTestBase {
     public void setup(){
         String URL= ConfigurationReader.getProperty("url");
         System.out.println("URL = " + URL);
+        //Driver.getDriver().manage().window().maximize();
         Driver.getDriver().get(URL);
         wait=new WebDriverWait(Driver.getDriver(),15);
         actions=new Actions(Driver.getDriver());

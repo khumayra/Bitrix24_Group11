@@ -26,7 +26,7 @@ public class EventTests extends AbstractTestBase {
      *      6- Verify event is added to activity stream
      */
     @Test
-    public void verifyEventCreateByLink(){
+    public void verifyLinkAddedToEvent(){
         LoginPage lp=new LoginPage();
         EventPage eventPage=new EventPage();
         ActivityStreamPage activityStreamPage=new ActivityStreamPage();
@@ -39,5 +39,34 @@ public class EventTests extends AbstractTestBase {
         eventPage.saveEvent();
         Assert.assertEquals(activityStreamPage.latestEventTitle(),eventTitle);
         BrowserUtils.wait(5);
+    }
+
+    /**
+     * User Story :
+     *  3. As a user, I should be able to create events by clicking on Event tab under Activity Stream.
+     *
+     *  Acceptance Criteria:
+     *   4. User should be able to insert videos by clicking on the video icon and entering the video URL.
+     *
+     */
+    @Test
+    public void verifyVideoInsertedToEvent(){
+        LoginPage lp=new LoginPage();
+        EventPage eventPage=new EventPage();
+        ActivityStreamPage activityStreamPage=new ActivityStreamPage();
+
+        lp.defaultLogin();
+        eventPage.navigateOnTopMenu("Event");
+        String eventTitle="Video meeting";
+        eventPage.setEventName(eventTitle);
+        eventPage.setEventText("Video meeting video link is attached \n");
+        String videoURL="https://www.youtube.com/watch?v=Ch_hoYPPeGc";
+        eventPage.insertVideoToEvent(videoURL);
+        eventPage.saveEvent();
+        Assert.assertEquals(activityStreamPage.latestEventTitle(),eventTitle);
+        //Assert.assertTrue(activityStreamPage.latestEventVideoLink().contains(videoURL));
+        BrowserUtils.wait(5);
+
+
     }
 }

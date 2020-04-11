@@ -9,21 +9,31 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class EventPage extends AbstractPageBase {
 
     @FindBy(css = "[placeholder='Event name']")
-    WebElement eventNameField;
+    private WebElement eventNameField;
     @FindBy(css = "#bx-html-editor-area-cnt-oCalEditorcal_3Jcl>div>iframe" )
-    WebElement textAreaFrame;
+    private WebElement textAreaFrame;
     @FindBy(tagName = "body")
-    WebElement textArea;
+    private WebElement textArea;
     @FindBy(css = "[id='bx-b-link-blogPostForm_calendar']>span")
-    WebElement addLink;
+    private WebElement addLink;
+
+
+    @FindBy(css = "#bx-b-video-blogPostForm_calendar>span")
+    private WebElement insertVideo;
+    @FindBy(id="video_oCalEditorcal_3Jcl-source")
+    private WebElement videoSourceField;
+    @FindBy(id = "video_oCalEditorcal_3Jcl-title")
+    private WebElement videoTitle;
+    @FindBy(id = "undefined")
+    private WebElement saveButton;
+
 
     @FindBy(id = "linkoCalEditorcal_3Jcl-text")
-    WebElement linkTextField;
+    private WebElement linkTextField;
     @FindBy(id = "linkoCalEditorcal_3Jcl-href")
-    WebElement linkURLField;
-
+    private WebElement linkURLField;
     @FindBy(id="blog-submit-button-save")
-    WebElement sendButton;
+    private WebElement sendButton;
 
 
     public void setEventName(String eventName){
@@ -39,9 +49,17 @@ public class EventPage extends AbstractPageBase {
 
     public void addLinkToEvent(String linkText, String linkURL){
         wait.until(ExpectedConditions.elementToBeClickable(addLink)).click();
-        wait.until(ExpectedConditions.visibilityOfAllElements(linkTextField));
+        wait.until(ExpectedConditions.visibilityOf(linkTextField));
         linkTextField.sendKeys(linkText);
         linkURLField.sendKeys(linkURL+ Keys.ENTER);
+    }
+
+    public void insertVideoToEvent(String videoURL){
+        wait.until(ExpectedConditions.elementToBeClickable(insertVideo)).click();
+        wait.until(ExpectedConditions.visibilityOf(videoSourceField)).sendKeys(videoURL);
+        //wait.until(ExpectedConditions.visibilityOf(videoTitle));
+        saveButton.click();
+
     }
 
     public void saveEvent(){

@@ -15,6 +15,7 @@ public class LoginTest extends AbstractTestBase {
         loginPage.navigateTo("Activity Stream");
         System.out.println(loginPage.pageSubtitle());
         System.out.println("Current user: " + loginPage.getCurrentUserName());
+        loginPage.searchBar("Contact info");
 
     }
 }

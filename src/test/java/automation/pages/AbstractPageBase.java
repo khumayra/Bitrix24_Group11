@@ -53,7 +53,14 @@ public abstract class AbstractPageBase {
         wait.until(ExpectedConditions.visibilityOf(currentUser));
         return currentUser.getText().trim();
     }
+public void searchBar (String searchText){
 
+    BrowserUtils.waitForPageToLoad(10);
+    wait.until(ExpectedConditions.visibilityOf(searchBar));
+     searchBar.sendKeys(searchText);
+     searchBar.click();
+
+}
 
 }
 

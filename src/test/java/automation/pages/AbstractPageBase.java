@@ -39,5 +39,17 @@ public abstract class AbstractPageBase {
         menuElement.click();
 
     }
+    public String pageSubtitle (){
+    WebElement subtitle = Driver.getDriver().findElement(By.id("pagetitle"));
+    wait.until(ExpectedConditions.visibilityOf(subtitle));
+
+    String subTitleText = subtitle.getText();
+    return subTitleText;
+
+
+    }
+
+
+
 }
 

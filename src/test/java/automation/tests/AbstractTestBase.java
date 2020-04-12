@@ -48,6 +48,7 @@ public abstract class AbstractTestBase {
 
         @AfterTest
         public void afterTest() {
+
             report.flush();
         }
 
@@ -56,7 +57,7 @@ public abstract class AbstractTestBase {
             String URL = ConfigurationReader.getProperty("url");
             Driver.getDriver().get(URL);
             Driver.getDriver().manage().window().maximize();
-            wait = new WebDriverWait(Driver.getDriver(), 20);
+            wait = new WebDriverWait(Driver.getDriver(), 25);
             actions = new Actions(Driver.getDriver());
         }
 

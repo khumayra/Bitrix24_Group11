@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
 
-    @FindBy(name="USER_LOGIN")
+    @FindBy(xpath="//input[contains(@type,'text')]")
     public WebElement userName;
 
     @FindBy(name="USER_PASSWORD")
@@ -24,12 +24,24 @@ public class LoginPage {
         PageFactory.initElements(Driver.getDriver(),this);
 
     }
-    public void login() {
-        userName.sendKeys(ConfigurationReader.getProperty("helpdesk"));
-        password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
+
+
+    public void login(String usernameValue, String passwordValue) {
+        userName.sendKeys(usernameValue);
+        password.sendKeys(passwordValue, Keys.ENTER);
         BrowserUtils.waitForPageToLoad(10);
         BrowserUtils.wait(3);
     }
 
-
+    /**
+     * Method to login, version #2
+     * Login as a default user
+     * Credentials will be retrieved from configuration.properties file
+     */
+    public void login() {
+        userName.sendKeys(ConfigurationReader.getProperty("hr"));
+        password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
+        BrowserUtils.waitForPageToLoad(10);
+        BrowserUtils.wait(3);
+    }
 }

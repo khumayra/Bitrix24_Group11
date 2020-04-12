@@ -34,11 +34,6 @@ public class LoginPage extends AbstractPageBase {
         BrowserUtils.wait(3);
     }
 
-    /**
-     * Method to login, version #2
-     * Login as a default user
-     * Credentials will be retrieved from configuration.properties file
-     */
     public void login() {
         userName.sendKeys(ConfigurationReader.getProperty("hr"));
         password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);

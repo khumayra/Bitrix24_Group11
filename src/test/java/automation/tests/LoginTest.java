@@ -10,7 +10,6 @@ public class LoginTest extends AbstractTestBase {
     @Test
     public void loginTest1() {
 
-
         loginPage.login();
         loginPage.navigateTo("Activity Stream");
 

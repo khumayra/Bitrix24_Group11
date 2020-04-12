@@ -38,6 +38,6 @@ public class LoginPage extends AbstractPageBase {
         userName.sendKeys(ConfigurationReader.getProperty("hr"));
         password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
         BrowserUtils.waitForPageToLoad(10);
-        BrowserUtils.wait(3);
+        BrowserUtils.wait(4);
     }
 }

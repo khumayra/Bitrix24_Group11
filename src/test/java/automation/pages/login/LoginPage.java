@@ -1,5 +1,6 @@
 package automation.pages.login;
 
+import automation.pages.AbstractPageBase;
 import automation.utilities.BrowserUtils;
 import automation.utilities.ConfigurationReader;
 import automation.utilities.Driver;
@@ -8,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+public class LoginPage extends AbstractPageBase {
 
     @FindBy(xpath="//input[contains(@type,'text')]")
     public WebElement userName;

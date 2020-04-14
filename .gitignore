@@ -3,3 +3,5 @@ target
 *.iml
 test-output
 .DS_Store
+target/
+/test_output/

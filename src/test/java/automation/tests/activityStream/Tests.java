@@ -50,8 +50,8 @@ public class Tests extends AbstractTestBase {
         Driver.getDriver().findElement(By.xpath("//input[contains(@name,'bxu_files[]')]")).sendKeys("/Users/sevimzini/Desktop/Hello batch 15.docx");
         BrowserUtils.wait(6);
 
-//verification part:
-        activityStreamPage.isFileDownloaded(filePath, fileName);
+        //verification part:
+        Assert.assertTrue(activityStreamPage.isFileDownloaded(filePath, fileName), "File is not downloaded successfully");
         test.pass("File uploaded successfully.");
 
     }

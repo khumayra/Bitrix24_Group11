@@ -16,53 +16,43 @@ import java.util.List;
 public class TaskTests extends AbstractTestBase {
     private By textEditorBarBy = By.xpath("//div[@id='bx-html-editor-tlbr-lifefeed_task_form']//span");
 
+
     @Test
     public void verifyHighPriorityChkBx () throws Exception{
         test = report.createTest("Selecting high priority checkbox make task top priority task");
         String titleValue = "Very Important Task";
         String descriptionValue = "Make it High Priority";
+        // Step 1: Login to WebPage with default creditials
         LoginPage loginPage = new LoginPage();
         loginPage.login();
+        // Step 2: Navigate to Task menu
         TaskPage taskPage = new TaskPage();
         taskPage.navigateTo("Task");
 
-        //filling out task form
-//        taskPage.enterTaskTitle(titleValue);
-//        taskPage.enterTaskDescription(descriptionValue);
-//        taskPage.selectHighPriority();
-//        taskPage.clickOnSave();
-//        taskPage.pressViewTaskBtnPopUp();
-//        driver.switchTo().activeElement();
-//        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//div[@class='side-panel-content-container']//iframe")));
-//        String actual = driver.findElement(By.id("task-detail-important-button")).getAttribute("class");
-//        String expected = "task-info-panel-important mutable";
-//        Assert.assertEquals(actual,expected);
-//
+        // Step3: Filling out task form
+        taskPage.enterTaskTitle(titleValue);
+        taskPage.enterTaskDescription(descriptionValue);
         Thread.sleep(4000);
+        //--------------------------------------------------------------------------------------
+        // Step 4: Checking if High Priority selected in New Task
         WebElement switchLabel = driver.findElement(By.xpath("//label[.='High Priority']"));
-        String colorRGB = ((JavascriptExecutor)driver)
-                .executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('background-position');",switchLabel).toString();
-        System.out.println(colorRGB);
+//        String actualBackgroundPositionBeforeChecked = ((JavascriptExecutor)driver)
+//                .executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('background-position');",switchLabel).toString();
+//        Assert.assertEquals(actualBackgroundPositionBeforeChecked,"0px -103px");
         taskPage.selectHighPriority();
-        colorRGB = ((JavascriptExecutor)driver)
+        String actualBackgroundPositionAfterChecked = ((JavascriptExecutor)driver)
                 .executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('background-position');",switchLabel).toString();
-        System.out.println(colorRGB);
-        //String expected = "task-info-panel-important mutable";
-        //Assert.assertEquals(actual,expected);
-
+        Assert.assertEquals(actualBackgroundPositionAfterChecked,"0px -85px");
+        //--------------------------------------------------------------------------------------
+        taskPage.clickOnSave();
+        // Step 5: Accessing Created Task
+        taskPage.pressViewTaskBtnPopUp();
+        Thread.sleep(4000);
+        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'IFRAME_TYPE=SIDE_SLIDER')]")));
+        // Step 6: Checking if High Priority enabled in Created Task
+        WebElement switchLabel1 = driver.findElement(By.xpath("(//span[.='High Priority'])[2]"));
+        String actualBckgrndPstnBeforeChecked = ((JavascriptExecutor)driver)
+                .executeScript("return window.getComputedStyle(document.getElementsByClassName('if-not-no')[0], '::after').getPropertyValue('background-position');",switchLabel1).toString();
+        Assert.assertEquals(actualBckgrndPstnBeforeChecked,"0px -122px");
     }
-
-    @Test
-    public void verifyVisibilityOfTextBar(){
-        test = report.createTest("Verify visibility of text editor toolbar");
-        LoginPage loginPage = new LoginPage();
-        loginPage.login();
-        TaskPage taskPage = new TaskPage();
-        taskPage.navigateTo("Task");
-        taskPage.makeEditorTextBarVisible();
-        List<WebElement> textEditorBar = driver.findElements(textEditorBarBy);
-        Assert.assertTrue(textEditorBar.size()>0);
-        test.pass("Visibility of text editor toolbar verified!");
-    }
-
 }

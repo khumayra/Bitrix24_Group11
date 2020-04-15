@@ -53,6 +53,11 @@ public class TaskPage extends AbstractPageBase {
     @FindBy (xpath = "//span[text()='View task']")
     private WebElement viewTaskBtn;
 
+    @FindBy(css = "[data-bx-id=task-edit-priority]")
+    private WebElement highPriorityValue;
+
+
+
     public void selectHighPriority(){
         wait.until(ExpectedConditions.elementToBeClickable(highPriorityChBx)).click();
     }
@@ -82,9 +87,7 @@ public class TaskPage extends AbstractPageBase {
         wait.until(ExpectedConditions.elementToBeClickable(viewTaskBtn)).click();
     }
 
-
-
-
-
-
+    public String getHighPriorityValue(){
+        return highPriorityValue.getAttribute("value");
+    }
 }

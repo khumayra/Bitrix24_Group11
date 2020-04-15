@@ -68,7 +68,7 @@ public abstract class AbstractTestBase {
             if (iTestResult.getStatus() == ITestResult.FAILURE) {
 
                 String screenshotPath = BrowserUtils.getScreenShot(iTestResult.getName());
-                test.fail(iTestResult.getName());//attach test name that failed
+                test.fail(iTestResult.getName());
                 BrowserUtils.wait(2);
                 test.addScreenCaptureFromPath(screenshotPath, "Failed");
                 test.fail(iTestResult.getThrowable());

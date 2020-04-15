@@ -20,6 +20,9 @@ public class LoginPage extends AbstractPageBase {
     @FindBy(className ="login-btn")
     public WebElement loginButton;
 
+    @FindBy(className = "errortext")
+    private WebElement forgotErrorText;
+
 
     public LoginPage (){
         PageFactory.initElements(Driver.getDriver(),this);

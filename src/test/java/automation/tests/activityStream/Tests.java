@@ -45,13 +45,11 @@ public class Tests extends AbstractTestBase {
         // ==========
         String filePath = "/Users/bergenhigh/Desktop/Hello batch 15.docx";
         String fileName = "Hello batch 15.docx";
-        Driver.getDriver().findElement(By.xpath("//input[contains(@name,'bxu_files[]')]")).sendKeys("/Users/bergenhigh/Desktop/Hello batch 15.docx");
+        Driver.getDriver().findElement(By.xpath("//input[contains(@name,'bxu_files[]')]")).sendKeys("/Users/sevimzini/Desktop/Hello batch 15.docx");
         BrowserUtils.wait(6);
 
        // WebElement dowloadedFileName = Driver.getDriver().findElement(By.xpath("//span[@class='f-wrap'][contains(text(),'Hello batch 15.docx')]"));
         //wait.until(ExpectedConditions.visibilityOf(dowloadedFileName));
-
-
 
     }
     /*

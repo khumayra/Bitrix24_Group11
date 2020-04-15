@@ -9,6 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class ActivityStreamPage extends AbstractPageBase {
 
@@ -35,4 +37,12 @@ BrowserUtils.wait(6);
 
 
     }
+
+//Method that verifies a file is downloaded.
+
+    public boolean isFileDownloaded(String dir, String filename) {
+        System.out.println("File is downloaded successfully.");
+        return Files.exists(Paths.get(dir, filename));
+    }
+
 }

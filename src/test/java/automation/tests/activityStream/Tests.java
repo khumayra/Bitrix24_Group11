@@ -45,6 +45,11 @@ public class Tests extends AbstractTestBase {
 
 
     }
+    /*
+    Optional Test: User should be able to click "Applications" and see all
+    aplications available applications.
+
+     */
 
     @Test
     public void test2() {

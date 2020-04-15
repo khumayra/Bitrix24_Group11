@@ -30,17 +30,26 @@ public class Tests extends AbstractTestBase {
     public void userStory5() {
 
 
-//        test = report.createTest("verify  to click on upload files icon to upload files");
-//        loginPage.login();
-//        test.info("Login as HR");
-//        loginPage.navigateTo("Activity Stream");
-//
-//        WebElement more = Driver.getDriver().findElement(By.xpath("//span[contains(@id,'feed-add-post-form-link-text')]"));
-//        wait.until(ExpectedConditions.elementToBeClickable(more)).click();
-//        BrowserUtils.wait(6);
-//        WebElement file = Driver.getDriver().findElement(By.xpath("(//span[@class ='menu-popup-item-text'])[1]"));
-//        wait.until(ExpectedConditions.elementToBeClickable(file)).click();
-//
+        test = report.createTest("verify  to click on upload files icon to upload files");
+        loginPage.login();
+        test.info("Login as HR");
+        loginPage.navigateTo("Activity Stream");
+
+        WebElement more = Driver.getDriver().findElement(By.xpath("//span[contains(@id,'feed-add-post-form-link-text')]"));
+        wait.until(ExpectedConditions.elementToBeClickable(more)).click();
+        BrowserUtils.wait(6);
+
+        WebElement file = Driver.getDriver().findElement(By.xpath("(//span[@class ='menu-popup-item-text'])[1]"));
+        wait.until(ExpectedConditions.elementToBeClickable(file)).click();
+        BrowserUtils.wait(5);
+        // ==========
+        String filePath = "/Users/bergenhigh/Desktop/Hello batch 15.docx";
+        String fileName = "Hello batch 15.docx";
+        Driver.getDriver().findElement(By.xpath("//input[contains(@name,'bxu_files[]')]")).sendKeys("/Users/bergenhigh/Desktop/Hello batch 15.docx");
+        BrowserUtils.wait(6);
+
+       // WebElement dowloadedFileName = Driver.getDriver().findElement(By.xpath("//span[@class='f-wrap'][contains(text(),'Hello batch 15.docx')]"));
+        //wait.until(ExpectedConditions.visibilityOf(dowloadedFileName));
 
 
 

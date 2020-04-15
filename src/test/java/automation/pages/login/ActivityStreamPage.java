@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.io.File;
+
 public class ActivityStreamPage extends AbstractPageBase {
 
     @FindBy(xpath = "//span[contains(@id,'feed-add-post-form-link-text')]")

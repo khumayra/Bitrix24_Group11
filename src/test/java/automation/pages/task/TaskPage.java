@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class TaskPage extends AbstractPageBase {
@@ -56,14 +57,17 @@ public class TaskPage extends AbstractPageBase {
     @FindBy(css = "[data-bx-id=task-edit-priority]")
     private WebElement highPriorityValue;
 
+    @FindBy(xpath = "(//iframe[@class='bx-editor-iframe'])[2]")
+    private WebElement frameForQuote;
 
+    @FindBy(id="blog-submit-button-save")
+    private WebElement sendBtn;
 
     public void selectHighPriority(){
         wait.until(ExpectedConditions.elementToBeClickable(highPriorityChBx)).click();
     }
 
     public void enterTaskTitle(String titleValue){
-        BrowserUtils.waitForPageToLoad(20);
         wait.until(ExpectedConditions.visibilityOf(taskTitle)).sendKeys(titleValue);
     }
 
@@ -90,4 +94,18 @@ public class TaskPage extends AbstractPageBase {
     public String getHighPriorityValue(){
         return highPriorityValue.getAttribute("value");
     }
+
+    public void quoteBtnClick( ){
+        wait.until(ExpectedConditions.elementToBeClickable(quoteTextIcn)).click();
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt (frameForQuote));
+    }
+    public void sendBlockQuote(String text) {
+        driver.findElement(By.xpath("//blockquote")).sendKeys(text);
+    }
+
+    public void sendButton(){
+        driver.switchTo().defaultContent();
+        sendBtn.click();
+    }
+
 }

@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Date;
 import java.util.List;
 
 public class Tests extends AbstractTestBase {
@@ -44,10 +45,14 @@ public class Tests extends AbstractTestBase {
         BrowserUtils.wait(5);
         // ==========
 
-        String filePath = "/Users/sevimzini/Desktop/Hello batch 15.docx";
-        String fileName = "Hello batch 15.docx";
+        String filePath = "/Users/bergenhigh/Desktop/Hello batch 15.docx";
 
-        Driver.getDriver().findElement(By.xpath("//input[contains(@name,'bxu_files[]')]")).sendKeys("/Users/sevimzini/Desktop/Hello batch 15.docx");
+        //Date date = new Date();
+        //String timeStamp = "_" + date.toString().substring(4).substring(0, 23).replace(' ', '_');
+       // String fileName = "Hello batch 15"+timeStamp+".docx";
+       String fileName = "Hello batch 15.docx";
+
+        Driver.getDriver().findElement(By.xpath("//input[contains(@name,'bxu_files[]')]")).sendKeys("/Users/bergenhigh/Desktop/Hello batch 15.docx");
         BrowserUtils.wait(6);
 
         //verification part:

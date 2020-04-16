@@ -40,9 +40,8 @@ BrowserUtils.wait(6);
 
 //Method that verifies a file is downloaded.
 
-    public boolean isFileDownloaded(String dir, String filename) {
-        System.out.println("File is downloaded successfully.");
-        return Files.exists(Paths.get(dir, filename));
+    public boolean isFileDownloaded(String path, String filename) {
+        return Files.exists(Paths.get(path, filename));
     }
 
 }

@@ -19,7 +19,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * We cannot really create a dedicgtaed page class to store
  * elements form that menu
  */
-public class AbstractPageBase {
+public class AbstractPageBaseKhumayra {
     protected WebDriver driver = Driver.getDriver();
     protected WebDriverWait wait = new WebDriverWait(driver, 20);
     protected Actions actions;
@@ -28,7 +28,7 @@ public class AbstractPageBase {
     protected ExtentTest extentTest;
 
 
-    public AbstractPageBase (){
+    public AbstractPageBaseKhumayra(){
         PageFactory.initElements(Driver.getDriver(),this);
     }
 

@@ -1,6 +1,6 @@
 package automation.pages.login;
 
-import automation.pages.AbstractPageBase;
+import automation.pages.AbstractPageBaseKhumayra;
 import automation.utilities.ConfigurationReader;
 import automation.utilities.Driver;
 import org.openqa.selenium.Keys;
@@ -8,8 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage extends AbstractPageBase {
-    public LoginPage(){
+public class LoginPageKhumayra extends AbstractPageBaseKhumayra {
+    public LoginPageKhumayra(){
         PageFactory.initElements(Driver.getDriver(), this);
     }
     @FindBy (name = "USER_LOGIN")

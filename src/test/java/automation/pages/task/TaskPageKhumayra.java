@@ -1,16 +1,12 @@
 package automation.pages.task;
 
-import automation.pages.AbstractPageBase;
-import automation.utilities.BrowserUtils;
-import automation.utilities.DateTimeUtilities;
+import automation.pages.AbstractPageBaseKhumayra;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class TaskPage extends AbstractPageBase {
+public class TaskPageKhumayra extends AbstractPageBaseKhumayra {
 
     @FindBy (id ="tasks-task-priority-cb")
     private WebElement highPriorityChBx;

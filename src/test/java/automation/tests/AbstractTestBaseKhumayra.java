@@ -16,7 +16,7 @@ import org.testng.annotations.*;
 import java.io.IOException;
 import java.util.Date;
 
-public abstract class AbstractTestBase {
+public abstract class AbstractTestBaseKhumayra {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected Actions actions;

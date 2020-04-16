@@ -1,23 +1,19 @@
 package automation.tests.task;
 
-import automation.pages.login.LoginPage;
-import automation.pages.task.TaskPage;
-import automation.tests.AbstractTestBase;
+import automation.pages.login.LoginPageKhumayra;
+import automation.pages.task.TaskPageKhumayra;
+import automation.tests.AbstractTestBaseKhumayra;
 import automation.utilities.BrowserUtils;
-import automation.utilities.DateTimeUtilities;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
-public class TaskTests extends AbstractTestBase {
+public class TaskTestsKhumayra extends AbstractTestBaseKhumayra {
     private By textEditorBarBy = By.xpath("//div[@id='bx-html-editor-tlbr-lifefeed_task_form']//span");
 
 
@@ -27,10 +23,10 @@ public class TaskTests extends AbstractTestBase {
         String titleValue = "Very Important Task";
         String descriptionValue = "Make it High Priority";
         // Step 1: Login to WebPage with default creditials
-        LoginPage loginPage = new LoginPage();
-        loginPage.login();
+        LoginPageKhumayra loginPageKhumayra = new LoginPageKhumayra();
+        loginPageKhumayra.login();
         // Step 2: Navigate to Task menu
-        TaskPage taskPage = new TaskPage();
+        TaskPageKhumayra taskPage = new TaskPageKhumayra();
         taskPage.navigateTo("Task");
 
         // Step3: Filling out task form
@@ -64,9 +60,9 @@ public class TaskTests extends AbstractTestBase {
     @Test
     public void verifyVisibilityOfTextBar(){
         test = report.createTest("Verify visibility of text editor toolbar");
-        LoginPage loginPage = new LoginPage();
-        loginPage.login();
-        TaskPage taskPage = new TaskPage();
+        LoginPageKhumayra loginPageKhumayra = new LoginPageKhumayra();
+        loginPageKhumayra.login();
+        TaskPageKhumayra taskPage = new TaskPageKhumayra();
         taskPage.navigateTo("Task");
         taskPage.makeEditorTextBarVisible();
         List<WebElement> textEditorBar = driver.findElements(textEditorBarBy);
@@ -77,9 +73,9 @@ public class TaskTests extends AbstractTestBase {
     @Test
     public void verifyCreateQuote() {
         test = report.createTest("Verify creating the quote");
-        LoginPage loginPage = new LoginPage();
-        loginPage.login();
-        TaskPage taskPage = new TaskPage();
+        LoginPageKhumayra loginPageKhumayra = new LoginPageKhumayra();
+        loginPageKhumayra.login();
+        TaskPageKhumayra taskPage = new TaskPageKhumayra();
         taskPage.navigateTo("Task");
         taskPage.enterTaskTitle("Some Title");
         taskPage.quoteBtnClick();

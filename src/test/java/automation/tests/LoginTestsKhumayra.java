@@ -1,19 +1,19 @@
 package automation.tests;
 
-import automation.pages.login.LoginPage;
+import automation.pages.login.LoginPageKhumayra;
 import automation.utilities.Driver;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class LoginTests extends AbstractTestBase {
+public class LoginTestsKhumayra extends AbstractTestBaseKhumayra {
 
     @Test
     public void validCredentialLogin(){
     test = report.createTest("Valid credential login");
-        LoginPage loginPage = new LoginPage();
+        LoginPageKhumayra loginPageKhumayra = new LoginPageKhumayra();
         // login as helpDesk employee
-        loginPage.login();
+        loginPageKhumayra.login();
         test.info("Login as HelpDesk employee");
         Assert.assertEquals(Driver.getDriver().getTitle(),"Portal");
         test.pass ("Page title Portal was verified");
@@ -22,7 +22,7 @@ public class LoginTests extends AbstractTestBase {
     @Test (dataProvider = "credentials")
     public void verifyCredentialsDDT (String username){
         test = report.createTest("Valid multiple credentials login");
-        LoginPage longPage = new LoginPage();
+        LoginPageKhumayra longPage = new LoginPageKhumayra();
         longPage.login(username);
         test.info(String.format("Login as %s employee",username));
         Assert.assertEquals(Driver.getDriver().getTitle(),"Portal");
@@ -37,8 +37,8 @@ public class LoginTests extends AbstractTestBase {
     @Test (dataProvider = "invalid_credentials")
     public void invalidCredentialLogin (String username, String password){
        test = report.createTest(String.format("Log in with invalid credentials %s and %s",username,password));
-       LoginPage loginPage = new LoginPage();
-       loginPage.login(username, password);
+       LoginPageKhumayra loginPageKhumayra = new LoginPageKhumayra();
+       loginPageKhumayra.login(username, password);
        String expected = "Incorrect login or password";
        test.pass(expected);
     }

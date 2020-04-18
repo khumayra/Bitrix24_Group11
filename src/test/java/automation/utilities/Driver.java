@@ -35,6 +35,7 @@ public class Driver {
             switch (browser) {
                 case "chrome":
                     // Headless mode make executions faster it does everything except file uploading
+                    System.setProperty("webdriver.chrome.silentOutput", "true"); //THIS will surpress all logs expect INFO
                     WebDriverManager.chromedriver().setup();
                     ChromeOptions options=new ChromeOptions();
                     options.addArguments("start-maximized");

@@ -1,6 +1,6 @@
 package automation.tests.login;
 
-import automation.pages.activitystream.ActivityStreamPage;
+import automation.pages.activitystream.ActivityStreamPageForEvent;
 import automation.pages.login.LoginPage;
 import automation.tests.AbstractTestBase;
 import org.testng.Assert;
@@ -20,7 +20,7 @@ public class LoginTests  extends AbstractTestBase {
     public void verifySuccessfulLogin(){
         LoginPage loginPage=new LoginPage();
         loginPage.defaultLogin();
-        ActivityStreamPage page=new ActivityStreamPage();
+        ActivityStreamPageForEvent page=new ActivityStreamPageForEvent();
         String expected="hr46@cybertekschool.com";
         Assert.assertEquals(page.getCurrentUserName(),expected,"user name is not matching");
     }

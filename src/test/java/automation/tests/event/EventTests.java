@@ -1,6 +1,6 @@
 package automation.tests.event;
 
-import automation.pages.activitystream.ActivityStreamPage;
+import automation.pages.activitystream.ActivityStreamPageForEvent;
 import automation.pages.event.EventPage;
 import automation.pages.login.LoginPage;
 import automation.tests.AbstractTestBase;
@@ -35,7 +35,7 @@ public class EventTests extends AbstractTestBase {
     public void verifyLinkAddedToEvent(){
         LoginPage lp=new LoginPage();
         EventPage eventPage=new EventPage();
-        ActivityStreamPage activityStreamPage=new ActivityStreamPage();
+        ActivityStreamPageForEvent activityStreamPageForEvent =new ActivityStreamPageForEvent();
         lp.defaultLogin();
         eventPage.navigateOnTopMenu("Event");
         String eventTitle="Planning meeting";
@@ -43,7 +43,7 @@ public class EventTests extends AbstractTestBase {
         eventPage.setEventText("Sprint#21 planning meeting will cover .... \n");
         eventPage.addLinkToEvent("Spring planning info link","https://www.leadingagile.com/2012/08/simple-cheat-sheet-to-sprint-planning-meeting/");
         eventPage.saveEvent();
-        Assert.assertEquals(activityStreamPage.latestEventTitle(),eventTitle);
+        Assert.assertEquals(activityStreamPageForEvent.latestEventTitle(),eventTitle);
         BrowserUtils.wait(5);
     }
 
@@ -59,7 +59,7 @@ public class EventTests extends AbstractTestBase {
     public void verifyVideoInsertedToEvent(){
         LoginPage lp=new LoginPage();
         EventPage eventPage=new EventPage();
-        ActivityStreamPage activityStreamPage=new ActivityStreamPage();
+        ActivityStreamPageForEvent activityStreamPageForEvent =new ActivityStreamPageForEvent();
 
         lp.defaultLogin();
         eventPage.navigateOnTopMenu("Event");
@@ -69,8 +69,8 @@ public class EventTests extends AbstractTestBase {
         String videoURL="https://www.youtube.com/watch?v=Ch_hoYPPeGc";
         eventPage.insertVideoToEvent(videoURL);
         eventPage.saveEvent();
-        Assert.assertEquals(activityStreamPage.latestEventTitle(),eventTitle);
-        //Assert.assertTrue(activityStreamPage.latestEventVideoLink().contains(videoURL));
+        Assert.assertEquals(activityStreamPageForEvent.latestEventTitle(),eventTitle);
+        //Assert.assertTrue(activityStreamPageForEvent.latestEventVideoLink().contains(videoURL));
         BrowserUtils.wait(5);
 
 

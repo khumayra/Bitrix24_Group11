@@ -17,6 +17,12 @@ public class EventTests extends AbstractTestBase {
      * Acceptance Criteria:
      *      2. User should be able to attach link by clicking on the link icon.
      *
+     * 6. User should be able to click on Visual Editor and see the editor text-bar displays on top of the message box.
+     * 7. User should be able to add Event start and ending date and time, and specify the time zone.
+     * 8. User should be able to set reminder by entering the timeing.
+     * 9. User should be able to select event location from dropdown.
+     * 10. User should be able to add attendees by selecting contacts individually or adding grups and departments.
+     * 11. Useer should be able to click on More to specify the event details.
      *  Test steps;
      *      1- Login with HR credentials
      *      2- Go to the event page

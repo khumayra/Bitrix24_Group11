@@ -6,7 +6,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 
 /**
@@ -26,7 +25,7 @@ import org.openqa.selenium.safari.SafariDriver;
 
 public class Driver {
     private static WebDriver driver;
-    private static ChromeOptions options;
+
     private Driver() {
     }
 
@@ -37,14 +36,12 @@ public class Driver {
                 case "chrome":
                     // Headless mode make executions faster it does everything except file uploading
                     WebDriverManager.chromedriver().version("79.0").setup();
-                    options = new ChromeOptions();
-                    options.addArguments("--disable-popup-blocking");
-                    driver = new ChromeDriver(options);
+                    driver = new ChromeDriver();
                     break;
                 case "chromeheadless":
                     //to run chrome without interface
                     WebDriverManager.chromedriver().version("79").setup();
-                    options = new ChromeOptions();
+                    ChromeOptions options = new ChromeOptions();
                     options.setHeadless(true);      //to run browser without interface
               //      options.addArguments("--start-maximized");
                     driver = new ChromeDriver(options);

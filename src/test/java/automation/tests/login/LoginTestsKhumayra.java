@@ -1,6 +1,7 @@
-package automation.tests;
+package automation.tests.login;
 
 import automation.pages.login.LoginPageKhumayra;
+import automation.tests.AbstractTestBaseKhumayra;
 import automation.utilities.Driver;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;

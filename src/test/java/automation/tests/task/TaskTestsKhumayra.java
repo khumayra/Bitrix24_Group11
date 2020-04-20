@@ -1,21 +1,20 @@
 package automation.tests.task;
 
-import automation.pages.login.LoginPageKhumayra;
+import automation.pages.login.LoginPage;
 import automation.pages.task.TaskPageKhumayra;
-import automation.tests.AbstractTestBaseKhumayra;
+import automation.tests.AbstractTestBase;
 import automation.utilities.BrowserUtils;
+import automation.utilities.Driver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class TaskTestsKhumayra extends AbstractTestBaseKhumayra {
-    private By textEditorBarBy = By.xpath("//div[@id='bx-html-editor-tlbr-lifefeed_task_form']//span");
-
+public class TaskTestsKhumayra extends AbstractTestBase {
 
     @Test
     public void verifyHighPriorityChkBx () throws Exception{
@@ -23,11 +22,11 @@ public class TaskTestsKhumayra extends AbstractTestBaseKhumayra {
         String titleValue = "Very Important Task";
         String descriptionValue = "Make it High Priority";
         // Step 1: Login to WebPage with default creditials
-        LoginPageKhumayra loginPageKhumayra = new LoginPageKhumayra();
-        loginPageKhumayra.login();
+        LoginPage loginPage = new LoginPage();
+        loginPage.loginAsHelpDesk();
         // Step 2: Navigate to Task menu
         TaskPageKhumayra taskPage = new TaskPageKhumayra();
-        taskPage.navigateTo("Task");
+        taskPage.navigateOnTopMenu("Task");
 
         // Step3: Filling out task form
         taskPage.enterTaskTitle(titleValue);
@@ -35,24 +34,26 @@ public class TaskTestsKhumayra extends AbstractTestBaseKhumayra {
         Thread.sleep(4000);
         //--------------------------------------------------------------------------------------
         // Step 4: Checking if High Priority selected in New Task
-        WebElement switchLabel = driver.findElement(By.xpath("//label[.='High Priority']"));
+//        WebElement switchLabel = driver.findElement(By.xpath("//label[.='High Priority']"));
 //        String actualBackgroundPositionBeforeChecked = ((JavascriptExecutor)driver)
 //                .executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('background-position');",switchLabel).toString();
 //        Assert.assertEquals(actualBackgroundPositionBeforeChecked,"0px -103px");
+        WebElement switchLabel=taskPage.setSwitchLabel();
         taskPage.selectHighPriority();
-        String actualBackgroundPositionAfterChecked = ((JavascriptExecutor)driver)
-                .executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('background-position');",switchLabel).toString();
+        String actualBackgroundPositionAfterChecked = taskPage.setActualBackgroundPositionAfterChecked();
         Assert.assertEquals(actualBackgroundPositionAfterChecked,"0px -85px");
         //--------------------------------------------------------------------------------------
         taskPage.clickOnSave();
         // Step 5: Accessing Created Task
+        //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='View task']")));
+        Driver.getDriver().switchTo().activeElement();
         taskPage.pressViewTaskBtnPopUp();
         Thread.sleep(4000);
-        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'IFRAME_TYPE=SIDE_SLIDER')]")));
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[contains(@src,'IFRAME_TYPE=SIDE_SLIDER')]")));
+        //driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'IFRAME_TYPE=SIDE_SLIDER')]")));
         // Step 6: Checking if High Priority enabled in Created Task
-        WebElement switchLabel1 = driver.findElement(By.xpath("(//span[.='High Priority'])[2]"));
-        String actualBckgrnAfterChecked = ((JavascriptExecutor)driver)
-                .executeScript("return window.getComputedStyle(document.getElementsByClassName('if-not-no')[0], '::after').getPropertyValue('background-position');",switchLabel1).toString();
+        WebElement switchLabel1 = taskPage.setSwitchLabel1();
+        String actualBckgrnAfterChecked = taskPage.checkPositionInExistingTask();
         Assert.assertEquals(actualBckgrnAfterChecked,"0px -122px");
         test.pass("High priority checkbox selection verified!");
     }
@@ -60,12 +61,12 @@ public class TaskTestsKhumayra extends AbstractTestBaseKhumayra {
     @Test
     public void verifyVisibilityOfTextBar(){
         test = report.createTest("Verify visibility of text editor toolbar");
-        LoginPageKhumayra loginPageKhumayra = new LoginPageKhumayra();
-        loginPageKhumayra.login();
+        LoginPage loginPage = new LoginPage();
+        loginPage.loginAsHelpDesk();
         TaskPageKhumayra taskPage = new TaskPageKhumayra();
-        taskPage.navigateTo("Task");
+        taskPage.navigateOnTopMenu("Task");
         taskPage.makeEditorTextBarVisible();
-        List<WebElement> textEditorBar = driver.findElements(textEditorBarBy);
+        List<WebElement> textEditorBar = taskPage.getTextEditorBarElements();
         Assert.assertTrue(textEditorBar.size()>0);
         test.pass("Visibility of text editor toolbar verified!");
     }
@@ -73,15 +74,15 @@ public class TaskTestsKhumayra extends AbstractTestBaseKhumayra {
     @Test
     public void verifyCreateQuote() {
         test = report.createTest("Verify creating the quote");
-        LoginPageKhumayra loginPageKhumayra = new LoginPageKhumayra();
-        loginPageKhumayra.login();
+        LoginPage loginPage = new LoginPage();
+        loginPage.loginAsHelpDesk();
         TaskPageKhumayra taskPage = new TaskPageKhumayra();
-        taskPage.navigateTo("Task");
+        taskPage.navigateOnTopMenu("Task");
         taskPage.enterTaskTitle("Some Title");
         taskPage.quoteBtnClick();
 
         //Assertion if quote button is clicked
-        String actual = driver.findElement(By.xpath("//blockquote")).getAttribute("class");
+        String actual = taskPage.getClassAttributeQuoteSelected();
         String expected = "bxhtmled-quote";
         Assert.assertEquals(actual,expected);
         String text = "Hello, World! "+ LocalDate.now();
@@ -90,10 +91,11 @@ public class TaskTestsKhumayra extends AbstractTestBaseKhumayra {
         //Assertion if quote was created
         taskPage.sendButton();
         taskPage.pressViewTaskBtnPopUp();
-        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@src]")));
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[@src]")));
+        //driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@src]")));
         BrowserUtils.wait(4);
-        String actual1=driver.findElement(By.xpath(String.format("//td[text()='%s']",text))).getText();
         String expected1=text;
+        String actual1 = taskPage.getQuoteText(text);
         Assert.assertEquals(actual1,expected1);
     }
 }

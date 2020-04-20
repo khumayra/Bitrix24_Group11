@@ -35,13 +35,16 @@ public class Driver {
             switch (browser) {
                 case "chrome":
                     // Headless mode make executions faster it does everything except file uploading
-                    WebDriverManager.chromedriver().version("79.0").setup();
-                    driver = new ChromeDriver();
+                    System.setProperty("webdriver.chrome.silentOutput", "true"); //THIS will surpress all logs expect INFO
+                    WebDriverManager.chromedriver().setup();
+                    ChromeOptions options=new ChromeOptions();
+                    options.addArguments("--disable-popup-blocking");
+                    driver = new ChromeDriver(options);
                     break;
                 case "chromeheadless":
                     //to run chrome without interface
                     WebDriverManager.chromedriver().version("79").setup();
-                    ChromeOptions options = new ChromeOptions();
+                     options = new ChromeOptions();
                     options.setHeadless(true);      //to run browser without interface
               //      options.addArguments("--start-maximized");
                     driver = new ChromeDriver(options);

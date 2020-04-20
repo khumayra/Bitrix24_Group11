@@ -14,67 +14,56 @@ import org.testng.annotations.*;
 import java.io.IOException;
 
 public abstract class AbstractTestBase {
+    protected WebDriverWait wait;   // Explicit wait
+    protected Actions actions;
 
+    protected ExtentReports report;
+    protected ExtentHtmlReporter htmlReporter;
+    protected ExtentTest test;
 
-        protected WebDriverWait wait;
-        protected Actions actions;
+    @BeforeTest
+    @Parameters("reportName")
+    public void setupTest(@Optional String reportName){
+        //System.out.println("reportName = " + reportName);
+        reportName=reportName ==null ? "report.html" : reportName+".html";
+        report=new ExtentReports();
+        String reportPath=System.getProperty("user.dir")+"/test_output/"+reportName;
+        //   System.out.println("reportPath = " + reportPath);
+        htmlReporter=new ExtentHtmlReporter(reportPath);
+        report.attachReporter(htmlReporter);
+        htmlReporter.config().setReportName("Bitrix24 Test Automation Results");
 
-        protected ExtentReports report;
-        protected ExtentHtmlReporter htmlReporter;
-        protected ExtentTest test;
-
-
-        @BeforeTest
-        @Parameters("reportName")
-        public void setupTest(@Optional String reportName) {
-            System.out.println("Report name: " + reportName);
-            reportName = reportName == null ? "report.html" : reportName + ".html";
-
-            report = new ExtentReports();
-
-            String reportPath = "";
-
-            if (System.getProperty("os.name").toLowerCase().contains("win")) {
-                reportPath = System.getProperty("user.dir") + "\\test-output\\" + reportName;
-            } else {
-                reportPath = System.getProperty("user.dir") + "/test-output/" + reportName;
-            }
-
-            htmlReporter = new ExtentHtmlReporter(reportPath);
-
-            report.attachReporter(htmlReporter);
-            htmlReporter.config().setReportName("Bitrix24 Test Automation Results");
-        }
-
-        @AfterTest
-        public void afterTest() {
-
-            report.flush();
-        }
-
-        @BeforeMethod
-        public void setup() {
-            String URL = ConfigurationReader.getProperty("url");
-            Driver.getDriver().get(URL);
-            Driver.getDriver().manage().window().maximize();
-            wait = new WebDriverWait(Driver.getDriver(), 25);
-            actions = new Actions(Driver.getDriver());
-        }
-
-
-        @AfterMethod
-        public void teardown(ITestResult iTestResult) throws IOException {
-
-            if (iTestResult.getStatus() == ITestResult.FAILURE) {
-
-                String screenshotPath = BrowserUtils.getScreenShot(iTestResult.getName());
-                test.fail(iTestResult.getName());
-                BrowserUtils.wait(2);
-                test.addScreenCaptureFromPath(screenshotPath, "Failed");
-                test.fail(iTestResult.getThrowable());
-            }
-            BrowserUtils.wait(2);
-            Driver.closeDriver();
-        }
     }
 
+    @AfterTest
+    public void afterTest(){
+        report.flush();
+    }
+
+    @BeforeMethod
+    public void setup(){
+        String URL= ConfigurationReader.getProperty("url");
+        System.out.println("URL = " + URL);
+        //Driver.getDriver().manage().window().maximize();
+        Driver.getDriver().get(URL);
+        wait=new WebDriverWait(Driver.getDriver(),15);
+        actions=new Actions(Driver.getDriver());
+    }
+
+    @AfterMethod
+    public void teardown(ITestResult iTestResult) throws IOException {
+        //ITestResult class describes the result of a test.
+        //if test failed, take a screenshot
+        //no failure - no screenshot
+        if (iTestResult.getStatus() == ITestResult.FAILURE) {
+            //screenshot will have a name of the test
+            String screenshotPath = BrowserUtils.getScreenShot(iTestResult.getName());
+            test.fail(iTestResult.getName());//attach test name that failed
+            BrowserUtils.wait(2);
+            test.addScreenCaptureFromPath(screenshotPath, "Failed");//attach screenshot
+            test.fail(iTestResult.getThrowable());//attach console output
+        }
+        Driver.closeDriver();
+    }
+
+}

@@ -1,43 +1,38 @@
 package automation.pages.login;
 
 import automation.pages.AbstractPageBase;
-import automation.utilities.BrowserUtils;
 import automation.utilities.ConfigurationReader;
-import automation.utilities.Driver;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends AbstractPageBase {
 
-    @FindBy(xpath="//input[contains(@type,'text')]")
-    public WebElement userName;
+    @FindBy(name = "USER_LOGIN")
+    WebElement userName;
+    @FindBy(name = "USER_PASSWORD")
+    WebElement password;
+    @FindBy(className = "login-btn")
+    WebElement loginButton;
+    @FindBy(className = "errortext")
+    WebElement errorMessage;
 
-    @FindBy(name="USER_PASSWORD")
-    public WebElement password;
-
-    @FindBy(className ="login-btn")
-    public WebElement loginButton;
-
-
-    public LoginPage (){
-        PageFactory.initElements(Driver.getDriver(),this);
-
-    }
-
-
-    public void login(String usernameValue, String passwordValue) {
-        userName.sendKeys(usernameValue);
-        password.sendKeys(passwordValue, Keys.ENTER);
-        BrowserUtils.waitForPageToLoad(10);
-        BrowserUtils.wait(3);
-    }
-
-    public void login() {
+    public void defaultLogin(){
         userName.sendKeys(ConfigurationReader.getProperty("hr"));
-        password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
-        BrowserUtils.waitForPageToLoad(10);
-        BrowserUtils.wait(3);
+        password.sendKeys(ConfigurationReader.getProperty("password"));
+        loginButton.click();
+    }
+    public void login(String user, String pass){
+        userName.sendKeys(user);
+        password.sendKeys(pass);
+        loginButton.click();
+    }
+    public String getErrorMessage(){
+        return wait.until(ExpectedConditions.visibilityOf(errorMessage)).getText().trim();
+    }
+    public void loginAsHelpDesk(){
+        userName.sendKeys(ConfigurationReader.getProperty("helpdesk"));
+        password.sendKeys(ConfigurationReader.getProperty("password"));
+        loginButton.click();
     }
 }

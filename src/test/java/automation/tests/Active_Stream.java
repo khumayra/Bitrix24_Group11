@@ -12,8 +12,7 @@ import org.testng.annotations.Test;
 
 public class Active_Stream extends AbstractTestBase {
 
-    static WebDriver driver = Driver.getDriver();
-
+    static WebDriver driver  = Driver.getDriver();
     LoginPage loginPage = new LoginPage();
 
     @Test
@@ -39,3 +38,7 @@ public class Active_Stream extends AbstractTestBase {
         BrowserUtils.wait(3);
     }
 }
+
+
+
+

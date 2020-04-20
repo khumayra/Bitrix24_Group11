@@ -38,7 +38,7 @@ public class Driver {
                     System.setProperty("webdriver.chrome.silentOutput", "true"); //THIS will surpress all logs expect INFO
                     WebDriverManager.chromedriver().setup();
                     ChromeOptions options=new ChromeOptions();
-                    options.addArguments("start-maximized");
+                    options.addArguments("--disable-popup-blocking");
                     driver = new ChromeDriver(options);
                     break;
                 case "chromeheadless":

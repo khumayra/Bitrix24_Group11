@@ -1,9 +1,11 @@
 package automation.utilities;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 public class DateTimeUtilities {
     /**
@@ -24,6 +26,13 @@ public class DateTimeUtilities {
      */
     public static String getCurrentDate(String format){
         return LocalDate.now().format(DateTimeFormatter.ofPattern(format));
+    }
+
+    public static String getCurrentTime (String format){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+        Date date = new Date();
+        return simpleDateFormat.format(date);
+
     }
 
     /**

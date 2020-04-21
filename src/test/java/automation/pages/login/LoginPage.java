@@ -30,4 +30,9 @@ public class LoginPage extends AbstractPageBase {
     public String getErrorMessage(){
         return wait.until(ExpectedConditions.visibilityOf(errorMessage)).getText().trim();
     }
+    public void loginAsHelpDesk(){
+        userName.sendKeys(ConfigurationReader.getProperty("helpdesk"));
+        password.sendKeys(ConfigurationReader.getProperty("password"));
+        loginButton.click();
+    }
 }

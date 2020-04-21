@@ -1,4 +1,4 @@
 package automation.tests.event;
 
-public class EventTests2 {
+public class EventTest3 {
 }

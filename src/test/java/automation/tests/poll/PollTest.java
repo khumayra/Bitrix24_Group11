@@ -176,9 +176,9 @@ public class PollTest extends AbstractTestBase {
         WebElement employeeAdded = Driver.getDriver().findElement(By.xpath("//span[@class='feed-add-post-destination-text'][contains(text(),'marketing2@cybertekschool.com')]"));
         wait.until(ExpectedConditions.visibilityOf(employeeAdded));
         Assert.assertEquals(employeeAdded.getText().trim(), "marketing2@cybertekschool.com");
-        BrowserUtils.wait(4);
+        BrowserUtils.wait(3);
         Driver.getDriver().findElement(sendBtn).click();
 
-        BrowserUtils.wait(4);
+        BrowserUtils.wait(3);
     }
 }

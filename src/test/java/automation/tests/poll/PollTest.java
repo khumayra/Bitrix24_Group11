@@ -36,7 +36,7 @@ public class PollTest extends AbstractTestBase {
     public void verifyVisibilityOfTextBar() {
         test = report.createTest("Verify visibility of text editor toolbar");
         LoginPage loginPage = new LoginPage();
-        loginPage.login("helpdesk","password");
+        loginPage.defaultLogin();
         PollPage pollPage = new PollPage();
         pollPage.navigateOnTopMenu("Poll");
         pollPage.makeEditorTextBarVisible();
@@ -56,8 +56,8 @@ public class PollTest extends AbstractTestBase {
     @Test
     public void verifyUploadingFile() {
         test = report.createTest("Verify file uploading");
-        LoginPage loginPageOgulbeg = new LoginPage();
-        loginPageOgulbeg.login("helpdesk","password");
+        LoginPage loginPage = new LoginPage();
+        loginPage.defaultLogin();
         PollPage pollPage = new PollPage();
         pollPage.navigateOnTopMenu("Poll");
         BrowserUtils.wait(2);
@@ -76,7 +76,7 @@ public class PollTest extends AbstractTestBase {
     public void verifyAttachingLink() {
         test = report.createTest("Verify attaching the link");
         LoginPage loginPage = new LoginPage();
-        loginPage.login("helpdesk","password");
+        loginPage.defaultLogin();
         PollPage pollPage = new PollPage();
         pollPage.navigateOnTopMenu("Poll");
         BrowserUtils.wait(2);
@@ -97,7 +97,7 @@ public class PollTest extends AbstractTestBase {
     public void verifyVideoInsert() {//?
         test = report.createTest("Verify inserting the link video");
         LoginPage loginPage = new LoginPage();
-        loginPage.login("helpdesk","password");
+        loginPage.defaultLogin();
         PollPage pollPage = new PollPage();
         pollPage.navigateOnTopMenu("Poll");
         BrowserUtils.wait(2);
@@ -130,7 +130,7 @@ public class PollTest extends AbstractTestBase {
     public void creatingTheQuote() {
         test = report.createTest("Verify creating the quote");
         LoginPage loginPage = new LoginPage();
-        loginPage.login("helpdesk","password");
+        loginPage.defaultLogin();
         PollPage pollPage = new PollPage();
         pollPage.navigateOnTopMenu("Poll");
         BrowserUtils.wait(2);
@@ -159,7 +159,7 @@ public class PollTest extends AbstractTestBase {
     public void addMentionTest() {
         test = report.createTest("Verify creating the quote");
         LoginPage loginPage = new LoginPage();
-        loginPage.login("helpdesk","password");
+        loginPage.defaultLogin();
         PollPage pollPage = new PollPage();
         pollPage.navigateOnTopMenu("Poll");
         BrowserUtils.wait(2);

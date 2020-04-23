@@ -1,17 +1,20 @@
 package automation.pages.task;
 
 import automation.pages.AbstractPageBase;
-import automation.pages.AbstractPageBaseKhumayra;
 import automation.utilities.BrowserUtils;
+import org.apache.commons.math3.analysis.function.Exp;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
-public class TaskPageKhumayra extends AbstractPageBase {
+public class TaskPage extends AbstractPageBase {
 
     @FindBy (id ="tasks-task-priority-cb")
     private WebElement highPriorityChBx;
@@ -75,6 +78,13 @@ public class TaskPageKhumayra extends AbstractPageBase {
 
     @FindBy (xpath = "//blockquote")
     private WebElement quoteTxtSelected;
+
+    @FindBy(xpath="//input[@name='bxu_files[]']")
+    private WebElement uploadFilesAndImages;
+
+    @FindBy(xpath = "//span[@title='Click to insert file']")
+    private WebElement attachedFileName;
+
 
     public String getQuoteText (String text){
     return  driver.findElement(By.xpath(String.format("//td[text()='%s']",text))).getText();
@@ -146,6 +156,19 @@ public class TaskPageKhumayra extends AbstractPageBase {
     public void sendButton(){
         driver.switchTo().defaultContent();
         sendBtn.click();
+    }
+
+    public void pressUploadFilesBtn(){
+        wait.until(ExpectedConditions.elementToBeClickable(uploadFilesIcn)).click();
+    }
+    public void  pressUploadFilesAndImages(String path){
+        //wait.until(ExpectedConditions.visibilityOf( uploadFilesAndImages)).click();
+        uploadFilesAndImages.sendKeys(path);
+        BrowserUtils.wait(4);
+    }
+
+    public String getAttachedFileName(){
+        return wait.until(ExpectedConditions.visibilityOf(attachedFileName)).getText();
     }
 
 }

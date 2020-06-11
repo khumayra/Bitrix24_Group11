@@ -36,7 +36,7 @@ public class Driver {
                 case "chrome":
                     // Headless mode make executions faster it does everything except file uploading
 
-                    WebDriverManager.chromedriver().version("81").setup();
+                    WebDriverManager.chromedriver().version("79").setup();
                     driver = new ChromeDriver();
                     break;
                 case "chromeheadless":
@@ -71,5 +71,9 @@ public class Driver {
             driver.quit();
             driver = null;
         }
+    }
+
+    public static void changeMethod(){
+
     }
 }

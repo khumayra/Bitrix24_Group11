@@ -20,6 +20,7 @@ public class LoginPage extends AbstractPageBase {
     public void defaultLogin(){
         userName.sendKeys(ConfigurationReader.getProperty("hr"));
         password.sendKeys(ConfigurationReader.getProperty("password"));
+        //Added comments
         loginButton.click();
     }
     public void login(String user, String pass){

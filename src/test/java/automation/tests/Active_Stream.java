@@ -18,7 +18,7 @@ public class Active_Stream extends AbstractTestBase {
     @Test
     public void activeStream() {
         test = report.createTest("Verify Activity Stream and Save Filter ");
-        loginPage.login();
+        loginPage.defaultLogin();
         BrowserUtils.wait(3);
         driver.findElement(By.id("LIVEFEED_search")).click();
         BrowserUtils.wait(2);
